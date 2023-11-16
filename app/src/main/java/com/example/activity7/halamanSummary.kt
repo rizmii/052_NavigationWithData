@@ -37,6 +37,8 @@ fun halamanSummary(
         Text(text = OrderUIState.noTelp)
         Divider()
         Spacer(modifier = Modifier.padding(16.dp))
-
+        Button(onClick = onClickedButton){
+            Text(text = stringResource(id = R.string.back_button))
         }
     }
+}
