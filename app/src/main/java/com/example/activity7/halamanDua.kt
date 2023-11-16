@@ -17,50 +17,77 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.example.activity7.data.OrderUIState
 import com.example.activity7.komponen.FormatLabelHarga
 
 @Composable
 fun HalamanDua (
-orderUiState: OrderUIState,
-onCancelButtonClicked: () -> Unit,
+    orderUiState: OrderUIState,
+    onCancelButtonClicked: () -> Unit,
+    modifier: Modifier = Modifier
+){
+    val items = listOf(
+        Pair (stringResource (R. string . quantity), orderUiState.jumlah),
+        Pair (stringResource (R. string. flavor), orderUiState.rasa)
+    )
+    Column (
+        modifier = modifier,
+        verticalArrangement =Arrangement.SpaceBetween
+    ){
 
-modifier: Modifier = Modifier){
-val items = listOf(
-Pair (stringResource (R. string . quantity), orderUiState.jumlah),
-Pair (stringResource (R. string. flavor), orderUiState.rasa))
-Column (
-modifier = modifier,
-verticalArrangement =Arrangement.SpaceBetween){
-Column (
-modifier = Modifier. padding (dimensionResource (R. dimen . padding_medium) ),
-verticalArrangement = Arrangement.spacedBy (dimensionResource(R.dimen.padding_small) )){
-items . forEach{
-item ->
-Column {
-Text (item. first. uppercase() )
-Text (text = item.second.toString ( ) ,
-    fontWeight = FontWeight.Bold)
-Divider (thickness  =
-dimensionResource(R.dimen. thicness_divider) )}
-Spacer ( modifier = Modifier. height (dimensionResource (R. dimen. padding_small) ) )
-FormatLabelHarga (
-    subtotal =orderUiState. harga,
-modifier = Modifier . align (Alignment. End))}
-Row (
-modifier = Modifier
-    .weight(1f, false)
-    .padding(dimensionResource(R.dimen.padding_medium)) ){
-        Column(
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
+        Column (
+            modifier = Modifier .padding (dimensionResource (R. dimen . padding_medium) ),
+            verticalArrangement = Arrangement.spacedBy (dimensionResource(R.dimen.padding_small) )
+        ){
+            Text(text = "Nama")
+            Text(text = orderUiState.nama)
+            Divider()
+            Spacer(modifier = Modifier.padding(16.dp))
+            Text(text = "Alamat")
+            Text(text = orderUiState.alamat)
+            Divider()
+            Spacer(modifier = Modifier.padding(16.dp))
+            Text(text = "No Telepon")
+            Text(text = orderUiState.noTelp)
+            Divider()
+            Spacer(modifier = Modifier.padding(16.dp))
+            Button(onClick = onCancelButtonClicked){
+                Text(text = stringResource(id = R.string.back_button))
+            }
+            items . forEach{ item ->
+                Column {
+                    Text (item. first. uppercase() )
+                    Text (text = item.second.toString ( ) , fontWeight = FontWeight.Bold)
+                Divider (thickness  = dimensionResource(R.dimen. thicness_divider) )}
+            Spacer ( modifier = Modifier. height (dimensionResource (R. dimen. padding_small) ) )
+            FormatLabelHarga (
+                subtotal =orderUiState. harga,
+                modifier = Modifier . align (Alignment. End)
+            )
+            }
+        Row (
+            modifier = Modifier
+                .weight(1f, false)
+                .padding(dimensionResource(R.dimen.padding_medium))
+        ){
+            Column(
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ) {
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = {}
+                Button(
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = {}
             ) {
-                Text(stringResource(R.string.send))}
-
+                    Text(stringResource(R.string.send))
+                }
                 OutlinedButton(
                     modifier = Modifier.fillMaxWidth(),
-                            onClick = onCancelButtonClicked){
-                            Text(stringResource(R.string.cancel))}}}}}}
+                    onClick = onCancelButtonClicked
+                ){
+                    Text(stringResource(R.string.cancel))
+                }
+            }
+        }
+        }
+    }
+}
