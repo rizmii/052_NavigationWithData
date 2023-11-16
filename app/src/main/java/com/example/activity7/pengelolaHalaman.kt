@@ -30,6 +30,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 enum class PengelolaHalaman{
     Home,
     Rasa,
+    Formulir,
     Summary
 }
 
@@ -80,9 +81,15 @@ fun EsJumboApp(
             composable(route = PengelolaHalaman.Home.name) {
                 halamanHome(
                     onNextButtonClicked = {
-                        navController.navigate(PengelolaHalaman.Rasa.name)
+                        navController.navigate(PengelolaHalaman.Formulir.name)
                     }
                 )
+            }
+            composable(route = PengelolaHalaman.Formulir.name){
+                halamanForm(onSubmitButtonClick = {
+                    viewModel.setContact(it)
+                    navController.navigate(PengelolaHalaman.Rasa.name)
+                } )
             }
             composable(route = PengelolaHalaman.Rasa.name) {
                 val context = LocalContext.current
