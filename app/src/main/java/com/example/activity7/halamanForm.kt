@@ -34,5 +34,31 @@ fun halamanForm(
     }
     var listDataTxt:MutableList<String> = mutableListOf(namaTxt,alamatTxt,teleponTxt)
 
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .padding(16.dp)
+            .fillMaxSize()
+    ){
+        OutlinedTextField(value = namaTxt, onValueChange ={
+            namaTxt = it
+        }, label = {
+            Text(text = "Nama")
+        } )
+        OutlinedTextField(value = alamatTxt, onValueChange ={
+            alamatTxt = it
+        }, label={
+            Text(text = "Alamat")
+        } )
+        OutlinedTextField(value = teleponTxt, onValueChange ={
+            teleponTxt = it
+        }, label={
+            Text(text = "No Telepon")
+        } )
+        Spacer(modifier=Modifier.padding(16.dp))
+        Button(onClick = {onSubmitButtonClick(listDataTxt)}) {
 
+        }
+    }
 }
